@@ -45,7 +45,7 @@
 //            expect(_sut.words).notTo.beNil();
 //        });
 //
-//        it(@"should populate words property", ^{
+//        it(@"should call startNewRound", ^{
 //            id sutPartialMock = OCMPartialMock(_sut);
 //            OCMExpect([sutPartialMock startNewRound]);
 //
