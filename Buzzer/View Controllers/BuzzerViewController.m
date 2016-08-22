@@ -41,4 +41,10 @@
     return words;
 }
 
+- (IBAction)firstPlayerAction:(UIButton *)sender {
+}
+
+- (IBAction)secondPlayerAction:(UIButton *)sender {
+}
+
 @end

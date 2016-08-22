@@ -10,4 +10,9 @@
 
 @interface BuzzerViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *mainWordLabel;
+@property (weak, nonatomic) IBOutlet UILabel *optionWordLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *optionWordLeftConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *optionWordTopConstraint;
+
 @end

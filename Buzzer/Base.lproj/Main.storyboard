@@ -16,8 +16,68 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBb-H5-Dbo">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="c5P-fq-sFU"/>
+                                    <constraint firstAttribute="width" constant="100" id="yPt-ju-4al"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4g0-a7-T29">
+                                <rect key="frame" x="200" y="275" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="WoR-01-KZz"/>
+                                    <constraint firstAttribute="height" constant="50" id="ylP-ip-eqP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRM-PM-hWG">
+                                <rect key="frame" x="0.0" y="520" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="UT8-2D-lGq"/>
+                                    <constraint firstAttribute="height" constant="80" id="tUB-cw-bum"/>
+                                </constraints>
+                                <state key="normal" title="Player 1"/>
+                                <connections>
+                                    <action selector="firstPlayerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ibk-fa-i9u"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RdT-Uv-ToO">
+                                <rect key="frame" x="520" y="520" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="pBz-lh-5AF"/>
+                                    <constraint firstAttribute="height" constant="80" id="zPe-C4-hDZ"/>
+                                </constraints>
+                                <state key="normal" title="Player 2"/>
+                                <connections>
+                                    <action selector="secondPlayerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VHm-l8-kBv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mBb-H5-Dbo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4cn-NR-zOF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RdT-Uv-ToO" secondAttribute="bottom" id="6X2-Sr-grv"/>
+                            <constraint firstItem="mBb-H5-Dbo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="7du-A8-WGc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cRM-PM-hWG" secondAttribute="bottom" id="9Cb-l0-wab"/>
+                            <constraint firstItem="cRM-PM-hWG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Hy6-Ta-bZD"/>
+                            <constraint firstItem="4g0-a7-T29" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Rh1-RV-zX5"/>
+                            <constraint firstAttribute="trailing" secondItem="RdT-Uv-ToO" secondAttribute="trailing" id="WO7-rA-2As"/>
+                            <constraint firstItem="4g0-a7-T29" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h8u-03-xWn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainWordLabel" destination="4g0-a7-T29" id="kke-xa-dJu"/>
+                        <outlet property="optionWordLabel" destination="mBb-H5-Dbo" id="39l-Iu-6ca"/>
+                        <outlet property="optionWordLeftConstraint" destination="4cn-NR-zOF" id="eRQ-At-k2m"/>
+                        <outlet property="optionWordTopConstraint" destination="7du-A8-WGc" id="A4k-YF-8Az"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
