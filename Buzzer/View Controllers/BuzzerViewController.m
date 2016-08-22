@@ -8,10 +8,13 @@
 
 #import "BuzzerViewController.h"
 #import "Word.h"
+#import <QuartzCore/QuartzCore.h>
 
 const NSInteger scoreToWin = 10;
 
 @interface BuzzerViewController ()
+
+typedef void (^ __nullable CompletionBlock)();
 
 @property (strong, nonatomic) NSMutableArray *words;
 @property (assign, nonatomic) NSInteger targetWordIndex;
@@ -26,8 +29,6 @@ const NSInteger scoreToWin = 10;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.words = [self parseWords];
 }
 
 #pragma mark Parser
@@ -80,14 +81,82 @@ const NSInteger scoreToWin = 10;
     [self startNewGame];
 }
 
-#pragma mark Scrolling
+#pragma mark Animations
+
+- (void)animateOptionLabel {
+    [self resetOptionLabel];
+
+    CGFloat distance = ([[UIScreen mainScreen] bounds].size.width - self.optionWordLabel.frame.size.width) / 3;
+    NSTimeInterval duration = [self generateFloatBetweenMin:1.5f max:4.5f] / 3;
+
+    self.optionWordTopConstraint.constant = [self generateIntegerBetweenMin:5 max:10] * 10;
+    [self.view layoutIfNeeded];
+
+    [self fadeInToPosition:distance duration:duration completion:^{
+        [self moveToPosition:distance * 2 duration:duration completion:^{
+            [self fadeOutToPosition:distance * 3 duration:duration completion:^{
+                [self updateOptionWord];
+            }];
+        }];
+    }];
+}
+
+- (void)resetOptionLabel {
+    [CATransaction begin];
+
+    [self.view.layer removeAllAnimations];
+    [self.optionWordLabel.layer removeAllAnimations];
+    self.optionWordLabel.alpha = 0;
+    [self moveToPosition:0];
+
+    [CATransaction commit];
+}
+
+- (void)fadeInToPosition:(CGFloat)position duration:(NSTimeInterval)duration completion:(CompletionBlock)completionBlock {
+    self.optionWordLabel.alpha = 0;
+
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.optionWordLabel.alpha = 1;
+        [self moveToPosition:position];
+    } completion:^(BOOL finished) {
+        if (finished && completionBlock) {
+            completionBlock();
+        }
+    }];
+}
+
+- (void)fadeOutToPosition:(CGFloat)position duration:(NSTimeInterval)duration completion:(CompletionBlock)completionBlock {
+    self.optionWordLabel.alpha = 1;
+
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        self.optionWordLabel.alpha = 0;
+        [self moveToPosition:position];
+    } completion:^(BOOL finished) {
+        if (finished && completionBlock) {
+            completionBlock();
+        }
+    }];
+}
+
+- (void)moveToPosition:(CGFloat)position duration:(NSTimeInterval)duration completion:(CompletionBlock)completionBlock {
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [self moveToPosition:position];
+    } completion:^(BOOL finished) {
+        if (finished && completionBlock) {
+            completionBlock();
+        }
+    }];
+}
+
+- (void)moveToPosition:(CGFloat)position {
+    self.optionWordLeftConstraint.constant = position;
+    [self.view layoutIfNeeded];
+}
 
 #pragma mark Game logic
 
 - (void)updateTargetWord {
     if (self.words.count == 0) {
-        self.targetWordIndex = -1;
-        self.targetWordLabel.text = @"... no more words ...";
         return;
     }
 
@@ -97,6 +166,10 @@ const NSInteger scoreToWin = 10;
 }
 
 - (void)updateOptionWord {
+    if (self.words.count == 0) {
+        return;
+    }
+
     static NSInteger countWrongAttempts = 0;
 
     NSInteger index;
@@ -128,6 +201,9 @@ const NSInteger scoreToWin = 10;
     self.optionWordIndex = index;
     Word *word = self.words[self.optionWordIndex];
     self.optionWordLabel.text = word.spanishVersion;
+
+    // Wait a few moments before starting the animation
+    [self performSelector:@selector(animateOptionLabel) withObject:nil afterDelay:[self generateFloatBetweenMin:0.5f max:1.5f]];
 }
 
 - (void)updateFirstPlayerScore {
@@ -140,17 +216,28 @@ const NSInteger scoreToWin = 10;
 
 - (void)checkStatus {
     NSInteger maxCurrentScore = [self getMaxBetweenValue:self.firstPlayerScore other:self.secondPlayerScore];
+    NSString *player = maxCurrentScore == self.firstPlayerScore ? @"First" : @"Second";
 
     if (maxCurrentScore == scoreToWin) {
-        NSString *player = maxCurrentScore == self.firstPlayerScore ? @"First" : @"Second";
         self.statusLabel.text = [NSString stringWithFormat:@"Congratulations %@ player! \nYou won the game!", player];
         self.menuView.hidden = NO;
-    } else {
-        [self startNewRound];
+        return;
     }
+
+    [self.words removeObjectAtIndex:self.targetWordIndex];
+
+    if (self.words.count == 0) {
+        self.statusLabel.text = [NSString stringWithFormat:@"... no more words ... \n%@ player won the game.", player];
+        self.menuView.hidden = NO;
+        return;
+    }
+
+    [self startNewRound];
 }
 
 - (void)startNewGame {
+    self.words = [self parseWords];
+
     self.menuView.hidden = YES;
 
     self.firstPlayerScore = 0;
@@ -164,7 +251,9 @@ const NSInteger scoreToWin = 10;
 
 - (void)startNewRound {
     [self updateTargetWord];
-    [self performSelector:@selector(updateOptionWord) withObject:nil afterDelay:[self generateFloatBetweenMin:0.5f max:3.0f]];
+
+    [self resetOptionLabel];
+    [self updateOptionWord];
 }
 
 #pragma mark Helpers
