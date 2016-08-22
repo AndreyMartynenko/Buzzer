@@ -73,10 +73,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mainWordLabel" destination="4g0-a7-T29" id="kke-xa-dJu"/>
                         <outlet property="optionWordLabel" destination="mBb-H5-Dbo" id="39l-Iu-6ca"/>
                         <outlet property="optionWordLeftConstraint" destination="4cn-NR-zOF" id="eRQ-At-k2m"/>
                         <outlet property="optionWordTopConstraint" destination="7du-A8-WGc" id="A4k-YF-8Az"/>
+                        <outlet property="targetWordLabel" destination="4g0-a7-T29" id="UXt-no-umO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
