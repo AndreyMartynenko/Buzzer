@@ -15,4 +15,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *optionWordLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *optionWordTopConstraint;
 
+@property (weak, nonatomic) IBOutlet UILabel *firstPlayerScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondPlayerScoreLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
 @end

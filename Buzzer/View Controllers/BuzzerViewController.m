@@ -9,10 +9,16 @@
 #import "BuzzerViewController.h"
 #import "Word.h"
 
+const NSInteger scoreToWin = 10;
+
 @interface BuzzerViewController ()
 
 @property (strong, nonatomic) NSMutableArray *words;
 @property (assign, nonatomic) NSInteger targetWordIndex;
+@property (assign, nonatomic) NSInteger optionWordIndex;
+
+@property (assign, nonatomic) NSInteger firstPlayerScore;
+@property (assign, nonatomic) NSInteger secondPlayerScore;
 
 @end
 
@@ -51,11 +57,27 @@
 #pragma mark - Actions
 
 - (IBAction)firstPlayerAction:(UIButton *)sender {
-    [self updateTargetWord];
+    if (self.targetWordIndex == self.optionWordIndex) {
+        [self updateFirstPlayerScore];
+    } else {
+        [self updateSecondPlayerScore];
+    }
+
+    [self checkStatus];
 }
 
 - (IBAction)secondPlayerAction:(UIButton *)sender {
-    [self updateOptionWord];
+    if (self.targetWordIndex == self.optionWordIndex) {
+        [self updateSecondPlayerScore];
+    } else {
+        [self updateFirstPlayerScore];
+    }
+
+    [self checkStatus];
+}
+
+- (IBAction)startNewGameAction:(UIButton *)sender {
+    [self startNewGame];
 }
 
 #pragma mark Scrolling
@@ -63,12 +85,13 @@
 #pragma mark Game logic
 
 - (void)updateTargetWord {
-    self.targetWordIndex = [self generateIntegerBetweenMin:0 max:self.words.count];
     if (self.words.count == 0) {
+        self.targetWordIndex = -1;
         self.targetWordLabel.text = @"... no more words ...";
         return;
     }
 
+    self.targetWordIndex = [self generateIntegerBetweenMin:0 max:self.words.count];
     Word *word = self.words[self.targetWordIndex];
     self.targetWordLabel.text = word.englishVersion;
 }
@@ -102,8 +125,46 @@
         countWrongAttempts++;
     }
 
-    Word *word = self.words[index];
+    self.optionWordIndex = index;
+    Word *word = self.words[self.optionWordIndex];
     self.optionWordLabel.text = word.spanishVersion;
+}
+
+- (void)updateFirstPlayerScore {
+    self.firstPlayerScoreLabel.text = [@(++self.firstPlayerScore) stringValue];
+}
+
+- (void)updateSecondPlayerScore {
+    self.secondPlayerScoreLabel.text = [@(++self.secondPlayerScore) stringValue];
+}
+
+- (void)checkStatus {
+    NSInteger maxCurrentScore = [self getMaxBetweenValue:self.firstPlayerScore other:self.secondPlayerScore];
+
+    if (maxCurrentScore == scoreToWin) {
+        NSString *player = maxCurrentScore == self.firstPlayerScore ? @"First" : @"Second";
+        self.statusLabel.text = [NSString stringWithFormat:@"Congratulations %@ player! \nYou won the game!", player];
+        self.menuView.hidden = NO;
+    } else {
+        [self startNewRound];
+    }
+}
+
+- (void)startNewGame {
+    self.menuView.hidden = YES;
+
+    self.firstPlayerScore = 0;
+    self.firstPlayerScoreLabel.text = @"0";
+
+    self.secondPlayerScore = 0;
+    self.secondPlayerScoreLabel.text = @"0";
+
+    [self startNewRound];
+}
+
+- (void)startNewRound {
+    [self updateTargetWord];
+    [self performSelector:@selector(updateOptionWord) withObject:nil afterDelay:[self generateFloatBetweenMin:0.5f max:3.0f]];
 }
 
 #pragma mark Helpers
@@ -114,6 +175,10 @@
 
 - (CGFloat)generateFloatBetweenMin:(NSInteger)min max:(NSInteger)max {
     return ((float)arc4random() / UINT32_MAX * (max - min)) + min;
+}
+
+- (NSInteger)getMaxBetweenValue:(NSInteger)value other:(NSInteger)other {
+    return (value > other) ? value : other;
 }
 
 @end
