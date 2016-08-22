@@ -23,8 +23,8 @@
                                     <constraint firstAttribute="width" constant="200" id="WoR-01-KZz"/>
                                     <constraint firstAttribute="height" constant="50" id="ylP-ip-eqP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBb-H5-Dbo">
@@ -33,8 +33,8 @@
                                     <constraint firstAttribute="height" constant="80" id="c5P-fq-sFU"/>
                                     <constraint firstAttribute="width" constant="100" id="yPt-ju-4al"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRM-PM-hWG">
@@ -43,7 +43,10 @@
                                     <constraint firstAttribute="width" constant="80" id="UT8-2D-lGq"/>
                                     <constraint firstAttribute="height" constant="80" id="tUB-cw-bum"/>
                                 </constraints>
-                                <state key="normal" title="Player 1"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Player 1">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="firstPlayerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jyB-f8-90j"/>
                                 </connections>
@@ -54,7 +57,10 @@
                                     <constraint firstAttribute="width" constant="80" id="pBz-lh-5AF"/>
                                     <constraint firstAttribute="height" constant="80" id="zPe-C4-hDZ"/>
                                 </constraints>
-                                <state key="normal" title="Player 2"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Player 2">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="secondPlayerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KOQ-Jx-e6E"/>
                                 </connections>
@@ -65,8 +71,8 @@
                                     <constraint firstAttribute="width" constant="50" id="1xP-0Y-Mfy"/>
                                     <constraint firstAttribute="height" constant="50" id="tJm-NY-aPU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxB-VU-HiV">
@@ -75,8 +81,8 @@
                                     <constraint firstAttribute="height" constant="50" id="btd-cF-cvL"/>
                                     <constraint firstAttribute="width" constant="50" id="kAR-wo-fT8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npe-Hy-HTG">
@@ -88,8 +94,8 @@
                                             <constraint firstAttribute="width" constant="250" id="XlL-jU-rGo"/>
                                             <constraint firstAttribute="height" constant="50" id="l0v-59-mMQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LI-ad-Xyw">
@@ -98,13 +104,16 @@
                                             <constraint firstAttribute="height" constant="80" id="qqa-U1-nbX"/>
                                             <constraint firstAttribute="width" constant="160" id="xiw-SE-HIu"/>
                                         </constraints>
-                                        <state key="normal" title="Start new game"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Start new game">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="startNewGameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7xZ-ph-ca2"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.47843137254901963" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="8LI-ad-Xyw" firstAttribute="centerX" secondItem="Npe-Hy-HTG" secondAttribute="centerX" id="ETm-L6-OkD"/>
                                     <constraint firstAttribute="bottom" secondItem="8LI-ad-Xyw" secondAttribute="bottom" id="dls-Tj-IDc"/>
@@ -113,7 +122,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.47843137250000001" blue="0.066666666669999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Npe-Hy-HTG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="2SD-57-Du6"/>
                             <constraint firstAttribute="trailing" secondItem="Npe-Hy-HTG" secondAttribute="trailing" id="3dY-zh-cU1"/>

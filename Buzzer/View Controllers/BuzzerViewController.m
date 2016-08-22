@@ -10,7 +10,7 @@
 #import "Word.h"
 #import <QuartzCore/QuartzCore.h>
 
-const NSInteger scoreToWin = 10;
+static NSInteger const scoreToWin = 10;
 
 @interface BuzzerViewController ()
 
